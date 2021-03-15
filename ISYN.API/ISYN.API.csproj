@@ -4,5 +4,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ISYN.DataAccess\ISYN.DataAccess.csproj" />
+  </ItemGroup>
+
 
 </Project>

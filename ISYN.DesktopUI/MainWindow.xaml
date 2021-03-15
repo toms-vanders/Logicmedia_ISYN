@@ -7,6 +7,28 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="20" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="20" />
+        </Grid.RowDefinitions>
+
+        <!-- Column 1 -->
+        <TextBox x:Name="searchBar" Grid.Row="1" Grid.Column="1" 
+                 MinWidth="300"/>
+        <Button x:Name="searchButton" Content="Search" Grid.Row="2" Grid.Column="1" 
+                Click="searchButton_Click"/>
+
+        <!-- Column 2 -->
+        <ListBox x:Name="searchResults" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"
+               MinHeight="200" MinWidth="450"  Margin=" 10 0 0 0"/>
 
     </Grid>
 </Window>
