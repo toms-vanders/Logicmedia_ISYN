@@ -49,9 +49,6 @@ namespace ISYN.DesktopUI
             var notes = JsonConvert.DeserializeObject<IEnumerable<string>>(responseBody);
 
             searchResults.ItemsSource = notes;
-
-
-
         }
     }
 }
