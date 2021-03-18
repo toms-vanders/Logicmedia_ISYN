@@ -34,9 +34,11 @@ namespace ISYN.API.Controllers
         {
             NoteDataAccess data = new NoteDataAccess();
 
-
-            data.InsertNote(note.Content);
-            return note;
+            if (data.InsertNote(note.Content))
+            {
+                return note;
+            }
+            return BadRequest("Invalid data.");
         }
 
         [HttpGet("sayt/{content}")]

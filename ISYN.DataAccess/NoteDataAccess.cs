@@ -52,13 +52,18 @@ namespace ISYN.DataAccess
             return resultsList;
         }
 
-        public void InsertNote(string content)
+        public bool InsertNote(string content)
         {
             ElasticClient client = ElasticClientConnection.GetElasticClient();
 
             var note = new Note(content);
 
             var indexResponse = client.IndexDocument(note);
+            if (indexResponse.IsValid)
+            {
+                return true;
+            }
+            return false;
         }
 
         public IEnumerable<string> SearchAsYouType(string content)

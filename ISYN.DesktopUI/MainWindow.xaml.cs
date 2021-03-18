@@ -57,6 +57,17 @@ namespace ISYN.DesktopUI
             };
 
             var response = await _httpClient.PostAsJsonAsync("api/note", newNote);
+
+            if (response.IsSuccessStatusCode)
+            {
+                MessageBox.Show("Note added", "Successfully added new note!", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            }
+            else
+            {
+                MessageBox.Show("Error", "Error Code" +
+                response.StatusCode + " : Message - " + response.ReasonPhrase, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private async void addNoteSAYTButton_Click(object sender, RoutedEventArgs e)
@@ -67,6 +78,17 @@ namespace ISYN.DesktopUI
             };
 
             var response = await _httpClient.PostAsJsonAsync("api/note", newNote);
+
+            if (response.IsSuccessStatusCode)
+            {
+                MessageBox.Show("Note added", "Successfully added new note!", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            }
+            else
+            {
+                MessageBox.Show("Error", "Error Code" +
+                response.StatusCode + " : Message - " + response.ReasonPhrase, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private async void saytBar_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
