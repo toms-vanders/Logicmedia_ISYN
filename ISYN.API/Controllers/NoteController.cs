@@ -20,5 +20,31 @@ namespace ISYN.API.Controllers
 
             return data.GetAllNotes();
         }
+
+        [HttpGet("{content}")]
+        public IEnumerable<string> GetAllNotes(string content)
+        {
+            NoteDataAccess data = new NoteDataAccess();
+
+            return data.GetNotes(content);
+        }
+
+        [HttpPost]
+        public ActionResult<Note> InsertNote([FromBody] Note note)
+        {
+            NoteDataAccess data = new NoteDataAccess();
+
+
+            data.InsertNote(note.Content);
+            return note;
+        }
+
+        [HttpGet("sayt/{content}")]
+        public IEnumerable<string> SearchAsYouType(string content)
+        {
+            NoteDataAccess data = new NoteDataAccess();
+
+            return data.SearchAsYouType(content);
+        }
     }
 }

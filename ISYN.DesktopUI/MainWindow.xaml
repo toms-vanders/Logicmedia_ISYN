@@ -17,18 +17,36 @@
             <RowDefinition Height="20" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="20" />
         </Grid.RowDefinitions>
 
         <!-- Column 1 -->
-        <TextBox x:Name="searchBar" Grid.Row="1" Grid.Column="1" 
-                 MinWidth="300"/>
-        <Button x:Name="searchButton" Content="Search" Grid.Row="2" Grid.Column="1" 
-                Click="searchButton_Click"/>
+        <TextBlock Text="Regular Search" Grid.Row="1" Grid.Column="1"
+                   Margin="0 0 0 0" VerticalAlignment="Bottom" FontSize="20"/>
+        <TextBox x:Name="searchBar" Grid.Row="2" Grid.Column="1" TextWrapping="Wrap"
+                 Width="300" Margin="0 10 0 10"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1">
+            <Button x:Name="addNoteButton" Content="Add Note" Click="addNoteButton_Click"
+                    MinWidth="150"/>
+            <Button x:Name="searchButton" Content="Search" Click="searchButton_Click"
+                    MinWidth="150"/>
+        </StackPanel>
 
-        <!-- Column 2 -->
-        <ListBox x:Name="searchResults" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"
+
+        <!-- Column 1 Search as you type -->
+        <TextBlock Text="Search as You Type" Grid.Row="4" Grid.Column="1"
+                   Margin="0 20 0 0" VerticalAlignment="Bottom" FontSize="20"/>
+        <TextBox x:Name="saytBar" Grid.Row="5" Grid.Column="1" TextWrapping="Wrap"
+                 Width="300" Margin="0 10 0 10" TextChanged="saytBar_TextChanged"/>
+        <Button x:Name="addNoteSAYTButton" Content="Add Note" Grid.Row="6" Grid.Column="1"
+                Click="addNoteSAYTButton_Click" MinWidth="150"/>
+
+            <!-- Column 2 -->
+        <ListBox x:Name="searchResults" Grid.Row="1" Grid.Column="2" Grid.RowSpan="6"
                MinHeight="200" MinWidth="450"  Margin=" 10 0 0 0"/>
-
     </Grid>
 </Window>
