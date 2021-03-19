@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Notes } from './notes.model';
 import { NotesService } from './notes.service';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-home',
@@ -10,6 +12,8 @@ import { NotesService } from './notes.service';
 export class HomeComponent implements OnInit {
   loadedNotes: Notes[] = [];
   isFetching = false;
+  error = null;
+  private errorSub: Subscription;
 
 
   constructor(private http: HttpClient, private notesService: NotesService) {
@@ -17,19 +21,36 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.errorSub = this.notesService.error.subscribe(errorMessage => {
+      this.error = errorMessage;
+    });
+
     this.isFetching = true;
     this.notesService.getNotes().subscribe(notes => {
       this.isFetching = false;
       this.loadedNotes = notes;
-    });
+
+    },
+      error => {
+        this.error = error.message;
+      }
+    );
   }
 
   onGetNotes() {
+    //send http request
     this.isFetching = true;
     this.notesService.getNotes().subscribe(notes => {
       this.isFetching = false;
       this.loadedNotes = notes;
-    });
+
+
+    },
+      error => {
+        this.error = error.message;
+        console.log(error);
+      }
+    );
   }
 
   

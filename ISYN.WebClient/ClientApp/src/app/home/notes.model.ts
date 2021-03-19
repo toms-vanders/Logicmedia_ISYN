@@ -1,7 +1,7 @@
 export interface Notes {
-  content: string;
+  content?: string;
   id?: string;
 
- 
- 
 }
+
+
