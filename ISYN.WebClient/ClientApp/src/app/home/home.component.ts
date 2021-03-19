@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Notes } from './notes.model';
-import { map } from 'rxjs/operators';
+import { NotesService } from './notes.service';
 
 @Component({
   selector: 'app-home',
@@ -9,38 +9,30 @@ import { map } from 'rxjs/operators';
 })
 export class HomeComponent implements OnInit {
   loadedNotes: Notes[] = [];
+  isFetching = false;
 
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private notesService: NotesService) {
 
   }
 
   ngOnInit() {
-    this.getNotes();
+    this.isFetching = true;
+    this.notesService.getNotes().subscribe(notes => {
+      this.isFetching = false;
+      this.loadedNotes = notes;
+    });
   }
 
   onGetNotes() {
-    this.getNotes();
+    this.isFetching = true;
+    this.notesService.getNotes().subscribe(notes => {
+      this.isFetching = false;
+      this.loadedNotes = notes;
+    });
   }
 
-  private getNotes() {
-    this.http.get('https://localhost:44371/api/note/')
-      .pipe
-      (map((responseData: { [content: string]: Notes }) => {
-        const notesArray:Notes[] = [];
-        for (const content in responseData) {
-          if (responseData.hasOwnProperty(content)) {
-            notesArray.push({ ...responseData[content], id: content })
-          }
-          
-        }
-        return notesArray;
-      })
-      )
-      .subscribe(notes => {
-        this.loadedNotes = notes;
-      });
-    }
+  
 }
 
 
