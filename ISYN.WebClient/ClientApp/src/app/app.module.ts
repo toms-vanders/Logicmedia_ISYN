@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { AuthorsComponent } from './authors/authors.component';
 
 @NgModule({
@@ -17,7 +16,6 @@ import { AuthorsComponent } from './authors/authors.component';
     NavMenuComponent,
     HomeComponent,
     CounterComponent,
-    FetchDataComponent,
     AuthorsComponent
   ],
   imports: [
@@ -28,7 +26,6 @@ import { AuthorsComponent } from './authors/authors.component';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'authors', component: AuthorsComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
     ])
   ],
   providers: [],

@@ -14,9 +14,11 @@ export class HomeComponent implements OnInit {
   isFetching = false;
   error = null;
   private errorSub: Subscription;
+  stringJson: any;
+  stringObject: any;
 
 
-  constructor(private http: HttpClient, private notesService: NotesService) {
+  constructor( private notesService: NotesService) {
 
   }
 
@@ -29,7 +31,6 @@ export class HomeComponent implements OnInit {
     this.notesService.getNotes().subscribe(notes => {
       this.isFetching = false;
       this.loadedNotes = notes;
-
     },
       error => {
         this.error = error.message;
@@ -99,6 +100,11 @@ notes: Notes[]=[];
         this.notes = response;
       });
   }
+
+
+
+//novo
+
   */
 
 

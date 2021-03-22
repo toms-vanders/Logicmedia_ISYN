@@ -11,35 +11,30 @@ import { Subject, throwError } from 'rxjs';
 
 export class NotesService {
   error = new Subject<string>();
-    JSON: any;
+  private notes: Notes[] = [];
 
+  constructor(private http: HttpClient) { }
 
-  constructor(private http: HttpClient) {}
+  private url = 'https://localhost:44371/api/note/';
 
   
   getNotes() {
     return this.http
-      .get<{ [key: string]: Notes }>(
-        'https://localhost:44371/api/note/'
+      .get(this.url
       )
       .pipe(
         map(responseData => {
-          const notesArray: Notes[] = [];
-          for (const key in responseData) {
-            if (responseData.hasOwnProperty(key)) {
-              notesArray.push({ ...responseData[key], content: key });
-            }
-          }
-          return notesArray;
-          
+          this.notes = responseData as Notes[];
+          console.log(this.notes)
+          return this.notes;
+
         }),
-        catchError(errorRes => {
-          // Send to analytics server
-          return throwError(errorRes);
-        })
     );
     
   }
+ 
+
+  
   
     
 }

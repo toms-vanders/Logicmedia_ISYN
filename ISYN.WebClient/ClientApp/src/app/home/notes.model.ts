@@ -1,7 +1,11 @@
-export interface Notes {
-  content?: string;
-  id?: string;
+export class Notes {
+  content: string;
+  id: number;
 
+  constructor(content: string) {
+    this.content = content;
+
+  }
 }
 
 
