@@ -4,6 +4,7 @@
   },
   "dependencies": {
     "@types/mocha": "^8.2.1",
-    "bootstrap": "^3.4.1"
+    "bootstrap": "^3.4.1",
+    "ng2-completer": "^9.0.1"
   }
 }
