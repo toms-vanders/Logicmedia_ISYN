@@ -21,7 +21,7 @@ export class NotesService  {
 
   private url = 'https://localhost:44371/api/note/';
 
-  
+  //getting the notes from API
   getNotes() {
     return this.http
       .get(this.url
@@ -36,6 +36,7 @@ export class NotesService  {
     
   }
 
+  //searching the notes in the API
   search(searchedTerm:string) {
     return this.http
       .get(this.url + searchedTerm
@@ -49,6 +50,8 @@ export class NotesService  {
       );
 
   }
+
+ 
 
   
   

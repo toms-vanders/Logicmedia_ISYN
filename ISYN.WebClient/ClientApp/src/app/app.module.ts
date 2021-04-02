@@ -12,6 +12,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { AuthorsComponent } from './authors/authors.component';
+import { AddNoteComponent } from './add-note/add-note.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { AuthorsComponent } from './authors/authors.component';
     NavMenuComponent,
     HomeComponent,
     CounterComponent,
-    AuthorsComponent
+    AuthorsComponent,
+    AddNoteComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

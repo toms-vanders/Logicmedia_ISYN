@@ -22,32 +22,31 @@
 
   -->
 
-  <input
-         type="form-control"
-         name="searchedTerm"
-         typeof="searchedTerm"
-         [(ngModel)]="searchedTerm"
-         (ngModelChange)="search()"
-         placeholder="Search the notes"
-      />
-<div class="cd-xs-12">
-  <button class="btn btn-success">Add</button>
-  </div>
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>Notes</th>
-      </tr>
-    </thead>
-    <tbody>
-      <p *ngIf="loadedNotes.length < 1 && !isFetching">Loading...</p>
-      <ng-container *ngIf="loadedNotes.length >= 1 && !isFetching">
-        <tr *ngFor="let note of loadedNotes | paginate: {itemsPerPage:10, currentPage:p};">
-          <td><pre>{{note}}</pre></td>
-        </tr>
-      </ng-container>
-    </tbody>
-    <pagination-controls (pageChange)="p = $event"></pagination-controls>
-  </table>
+<input type="form-control"
+       name="searchedTerm"
+       typeof="searchedTerm"
+       [(ngModel)]="searchedTerm"
+       (ngModelChange)="search()"
+       placeholder="Search the notes" />
 
-  
+<hr />
+<app-add-note></app-add-note>
+<hr />
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <p *ngIf="loadedNotes.length < 1 && !isFetching">Loading...</p>
+    <ng-container *ngIf="loadedNotes.length >= 1 && !isFetching">
+      <tr *ngFor="let note of loadedNotes | paginate: {itemsPerPage:10, currentPage:p};">
+        <td><pre>{{note}}</pre></td>
+      </tr>
+    </ng-container>
+  </tbody>
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</table>
+
