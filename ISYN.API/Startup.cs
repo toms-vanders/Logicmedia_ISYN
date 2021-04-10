@@ -26,6 +26,16 @@ namespace ISYN.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "CorsPolicyAllHosts",
+                    builder =>
+                    {
+                        builder.AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowAnyOrigin();
+                    });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,6 +45,8 @@ namespace ISYN.API
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors("CorsPolicyAllHosts");
 
             app.UseHttpsRedirection();
 
@@ -46,6 +58,10 @@ namespace ISYN.API
             {
                 endpoints.MapControllers();
             });
+
+            
         }
     }
+
+
 }

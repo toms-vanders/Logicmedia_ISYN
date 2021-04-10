@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Notes } from './notes.model';
-import { NotesService } from './notes.service';
+import { NotesService } from '../shared/notes.service';
 import { Subscription } from 'rxjs';
 
 

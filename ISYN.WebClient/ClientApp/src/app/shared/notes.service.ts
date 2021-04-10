@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Notes } from './Notes.model';
-import { map, catchError } from 'rxjs/operators';
-import { Subject, throwError, Observable } from 'rxjs';
-import { CompleterItem, CompleterData } from 'ng2-completer';
+import { Notes } from '../home/Notes.model';
+import { map,  } from 'rxjs/operators';
+import { Subject, Observable } from 'rxjs';
+import { HttpHeaders } from '@angular/common/http';
+
 
 
 
@@ -15,9 +16,13 @@ export class NotesService  {
   private notes: Notes[] = [];
   error = new Subject<string>();
 
+
+  
+
   constructor(private http: HttpClient) {
       
   }
+
 
   private url = 'https://localhost:44371/api/note/';
 
@@ -48,12 +53,19 @@ export class NotesService  {
           return this.notes;
         }),
       );
-
   }
+
+ 
+  
+
+  
+
+  
+
+
+  
 
  
 
   
-  
-    
 }

@@ -20,13 +20,40 @@
         </div>
 
         <!-- Modal body -->
-        <div class="modal-body">
-          
-          <input type="form-control"
+        <!---<div class="form-group">
+
+          <form #postForm="ngForm" (ngSubmit)="addNote()" >
+                <div class="from-group">
+               <textarea class="from-control"
+                    id="content"
+                    required
+                    ngModel
+                    name="content"
+                    typeof="content"
+                    [(ngModel)]="content"
+                    placeholder="Add the note">
+                  </textarea>
+                  </div>
+          <button
+        class="btn btn-success" type="submit"
+                  [disabled]="!postForm.valid">Add</button>
+          </form>
                  
-                 placeholder="Add the note" />
-          <button class="btn btn-success">Add</button>
-        </div>
+                
+          
+        </div>-->
+
+        <form #notePost="ngForm" (ngSubmit)="addNote(notePost.value)">
+          <div class="from-group">
+            <input type="text"
+                   name="content"
+                   ngModel
+                   placeholder="Add the note" />
+            </div>
+            <button type="submit">Add</button>
+        </form>
+       
+
 
         <!-- Modal footer -->
         <div class="modal-footer">

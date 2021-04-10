@@ -1,26 +1,5 @@
 <h2>Search the notes</h2>
 
-<!----
-<div class="row">
-  <div class="col-xs-12">
-    <button class="btn btn-primary" (click)="onGetNotes()">
-      Get Notes
-    </button>
-    <p *ngIf="loadedNotes.length < 1 && !isFetching">No notes available!</p>
-    <ul class="list-group" *ngIf="loadedNotes.length >= 1 && !isFetching">
-      <li class="list-group-item" *ngFor="let note of loadedNotes">
-        <pre>{{note}}</pre>
-      </li>
-    </ul>
-    <p *ngIf="isFetching && !error">Loading...</p>
-    <div class="alert alert-danger" *ngIf="error">
-      <h1>An Error Occurred!</h1>
-      <p>{{ error }}</p>
-    </div>
-  </div>
-</div>
-
-  -->
 
 <input type="form-control"
        name="searchedTerm"
@@ -37,6 +16,7 @@
   <thead>
     <tr>
       <th>Notes</th>
+      <th>Add to the text field</th>
     </tr>
   </thead>
   <tbody>
@@ -44,9 +24,15 @@
     <ng-container *ngIf="loadedNotes.length >= 1 && !isFetching">
       <tr *ngFor="let note of loadedNotes | paginate: {itemsPerPage:10, currentPage:p};">
         <td><pre>{{note}}</pre></td>
+        <td><button type="button" class="btn btn-success text-center">Add</button></td>
       </tr>
     </ng-container>
+
+
   </tbody>
   <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </table>
+
+<h1>Your notes are displayed here</h1>
+<p>Add a field where the notes which user clicks display</p>
 
