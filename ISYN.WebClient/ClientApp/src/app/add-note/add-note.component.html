@@ -11,7 +11,7 @@
   <!-- The Modal -->
   <div class="modal c" id="myModal" [style.display]="showModal ? 'block' : 'none'">
     <div class="modal-dialog">
-      <div class="modal-content">
+      <div  class="modal-content">
 
         <!-- Modal Header -->
         <div class="modal-header">
@@ -20,47 +20,42 @@
         </div>
 
         <!-- Modal body -->
-        <!---<div class="form-group">
-
-          <form #postForm="ngForm" (ngSubmit)="addNote()" >
-                <div class="from-group">
-               <textarea class="from-control"
-                    id="content"
-                    required
-                    ngModel
-                    name="content"
-                    typeof="content"
-                    [(ngModel)]="content"
-                    placeholder="Add the note">
-                  </textarea>
-                  </div>
-          <button
-        class="btn btn-success" type="submit"
-                  [disabled]="!postForm.valid">Add</button>
-          </form>
-                 
-                
-          
-        </div>-->
-
         <form #notePost="ngForm" (ngSubmit)="addNote(notePost.value)">
           <div class="from-group">
-            <input type="text"
+
+            <input style="    background-color: #ece8e8" class="form-control"
+                   type="text"
                    name="content"
                    ngModel
+                   required
                    placeholder="Add the note" />
+          </div>
+          <div class="text-center">
+            <button class="btn btn-primary"
+                    type="submit"
+                    [disabled]="!notePost.valid">
+              Add
+            </button>
+          </div>
+
+          <div class="row" *ngIf="showMsg">
+            <div class="col-xs-12">
+              <p class="alert alert-success">
+                <strong>Success!</strong>The note was successfully added.
+              </p>
             </div>
-            <button type="submit">Add</button>
+          </div>
         </form>
-       
+          
 
 
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="hide()">Close</button>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="hide()">Close</button>
+          </div>
+
         </div>
-
       </div>
-    </div>
   </div>
 </div>

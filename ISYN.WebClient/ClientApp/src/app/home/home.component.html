@@ -1,38 +1,74 @@
-<h2>Search the notes</h2>
+<h2>NOTE BROWSER</h2>
 
 
-<input type="form-control"
+<input class="form-control form-control-lg"
+       style="width:100%"
+       type="form-control"
        name="searchedTerm"
        typeof="searchedTerm"
        [(ngModel)]="searchedTerm"
        (ngModelChange)="search()"
        placeholder="Search the notes" />
 
-<hr />
-<app-add-note></app-add-note>
-<hr />
 
-<table class="table table-bordered">
-  <thead>
-    <tr>
-      <th>Notes</th>
-      <th>Add to the text field</th>
-    </tr>
-  </thead>
-  <tbody>
-    <p *ngIf="loadedNotes.length < 1 && !isFetching">Loading...</p>
-    <ng-container *ngIf="loadedNotes.length >= 1 && !isFetching">
-      <tr *ngFor="let note of loadedNotes | paginate: {itemsPerPage:10, currentPage:p};">
-        <td><pre>{{note}}</pre></td>
-        <td><button type="button" class="btn btn-success text-center">Add</button></td>
-      </tr>
-    </ng-container>
+<div class="row">
+  <div class="col-sm-8">
+    <hr />
+    <app-add-note></app-add-note>
+    <hr />
+  </div>
+</div>
 
 
-  </tbody>
-  <pagination-controls (pageChange)="p = $event"></pagination-controls>
-</table>
 
-<h1>Your notes are displayed here</h1>
-<p>Add a field where the notes which user clicks display</p>
+<div class="row">
+  <div class="col-sm-8">
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Notes</th>
+          <th>Add to the list</th>
+        </tr>
+      </thead>
+      <tbody>
+        <p *ngIf="loadedNotes.length < 1 && !isFetching">Loading...</p>
+        <ng-container *ngIf="loadedNotes.length >= 1 && !isFetching">
+          <tr *ngFor="let note of loadedNotes | paginate: {itemsPerPage:10, currentPage:p};">
+            <td><pre>{{note}}</pre></td>
+            <td><button type="button" class="btn btn-success text-center">&#8680;</button></td>
+          </tr>
+        </ng-container>
+
+
+      </tbody>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </table>
+
+  </div>
+
+  <div class="col-sm-4">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>List with your notes</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+      <td></td>
+      <td><button type="button" class="btn btn-danger text-center">&otimes;</button></td>
+
+
+
+      </tbody>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </table>
+  </div>
+
+</div>
+
+
+
+  
 

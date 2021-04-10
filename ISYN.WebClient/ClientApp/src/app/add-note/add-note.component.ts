@@ -15,7 +15,7 @@ import { HttpHeaders } from '@angular/common/http';
 export class AddNoteComponent {
 
   loadedNotes: Notes[] = [];
-  msgTrue = false;
+  showMsg = false;
   error = null;
   content: any;
   private errorSub: Subscription;
@@ -48,6 +48,7 @@ export class AddNoteComponent {
       console.warn("result",result)
     })
     console.warn(JSON.stringify(data));
+    this.showMsg = true;
   }
 
   

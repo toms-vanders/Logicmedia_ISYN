@@ -10,7 +10,6 @@ import { Ng2CompleterModule } from 'ng2-completer';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
 import { AuthorsComponent } from './authors/authors.component';
 import { AddNoteComponent } from './add-note/add-note.component';
 
@@ -19,7 +18,6 @@ import { AddNoteComponent } from './add-note/add-note.component';
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
     AuthorsComponent,
     AddNoteComponent,
   ],
@@ -33,7 +31,6 @@ import { AddNoteComponent } from './add-note/add-note.component';
     NgxPaginationModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
       { path: 'authors', component: AuthorsComponent },
     ])
   ],
