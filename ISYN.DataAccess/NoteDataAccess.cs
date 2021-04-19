@@ -32,15 +32,36 @@ namespace ISYN.DataAccess
             ElasticClient client = ElasticClientConnection.GetElasticClient();
 
             var searchResponse = client.Search<Note>(s => s
-                .Size(15)
                 .Query(q => q
                     .Match(m => m
                         .Field(f => f.Content)
                         .Fuzziness(Fuzziness.Auto)
+                        .Operator(Operator.Or)
+                        .Query(content)
+                    ) || q
+                    .Match(m => m
+                        .Field(f => f.Content)
+                        .Fuzziness(Fuzziness.Auto)
+                        .Operator(Operator.And)
+                        .Query(content)
+                    ) || q
+                    .MatchPhrase(mp => mp
+                        .Field(f => f.Content)
+                        .Boost(2)
                         .Query(content)
                     )
-                )
+                 )
             );
+            //var searchResponse = client.Search<Note>(s => s
+            //    .Size(15)
+            //    .Query(q => q
+            //        .Match(m => m
+            //            .Field(f => f.Content)
+            //            .Fuzziness(Fuzziness.Auto)
+            //            .Query(content)
+            //        )
+            //    )
+            //);
 
             var resultsList = new List<string>();
 
