@@ -12,6 +12,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { AuthorsComponent } from './authors/authors.component';
 import { AddNoteComponent } from './add-note/add-note.component';
+import { Solution2Component } from './solution2/solution2.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { AddNoteComponent } from './add-note/add-note.component';
     HomeComponent,
     AuthorsComponent,
     AddNoteComponent,
+    Solution2Component
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -32,6 +34,7 @@ import { AddNoteComponent } from './add-note/add-note.component';
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'authors', component: AuthorsComponent },
+      { path: '2ndSolution', component: Solution2Component },
     ])
   ],
   providers: [],

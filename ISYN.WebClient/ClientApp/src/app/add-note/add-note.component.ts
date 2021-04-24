@@ -57,40 +57,7 @@ export class AddNoteComponent {
  
   
 
-  /*
-   addNote() {
-    this.notesService.addNote(this.content).subscribe(notes => {
-      this.loadedNotes = notes;
-    },
-      error => {
-        this.error = error.message;
-        console.log(error);
-      }
-    );
-  }
-
-addNote() {
-    this.notesService.addNote(this.note).subscribe(
-      data => {
-        console.log(data)
-        this.refreshNotes();
-      },
-      error => {
-      this.error = error.message;
-      console.log(error);
-    }
-    );
-  }
-
-addNote(note: Notes): void {
-    this.notesService.addNote(note).subscribe(
-      () => {
-        this.msgTrue = true;
-        console.log(this.msgTrue);
-        console.log(note);
-      }
-    );
-  }*/
+  
 
 
 

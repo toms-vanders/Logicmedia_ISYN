@@ -12,7 +12,7 @@
 
 
 <div class="row">
-  <div class="col-sm-8">
+  <div class="col-sm-12">
     <hr />
     <app-add-note></app-add-note>
     <hr />
@@ -22,21 +22,19 @@
 
 
 <div class="row">
-  <div class="col-sm-8">
+  <div class="col-md-12">
 
     <table class="table table-bordered">
       <thead>
         <tr>
           <th>Notes</th>
-          <th>Add to the list</th>
         </tr>
       </thead>
       <tbody>
         <p *ngIf="loadedNotes.length < 1 && !isFetching">Loading...</p>
         <ng-container *ngIf="loadedNotes.length >= 1 && !isFetching">
-          <tr *ngFor="let note of loadedNotes | paginate: {itemsPerPage:10, currentPage:p};">
+          <tr *ngFor="let note of loadedNotes | paginate: {itemsPerPage:5, currentPage:p};">
             <td><pre>{{note}}</pre></td>
-            <td><button type="button" class="btn btn-success text-center">&#8680;</button></td>
           </tr>
         </ng-container>
 
@@ -46,27 +44,11 @@
     </table>
 
   </div>
-
-  <div class="col-sm-4">
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th>List with your notes</th>
-          <th>Remove</th>
-        </tr>
-      </thead>
-      <tbody>
-      <td></td>
-      <td><button type="button" class="btn btn-danger text-center">&otimes;</button></td>
-
-
-
-      </tbody>
-      <pagination-controls (pageChange)="p = $event"></pagination-controls>
-    </table>
   </div>
 
-</div>
+ 
+
+
 
 
 

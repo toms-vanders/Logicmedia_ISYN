@@ -1,9 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Notes } from '../home/Notes.model';
-import { map,  } from 'rxjs/operators';
-import { Subject, Observable } from 'rxjs';
-import { HttpHeaders } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 
 
@@ -12,12 +11,9 @@ import { HttpHeaders } from '@angular/common/http';
   providedIn:'root'
 })
 
-export class NotesService  {
+export class NotesService implements OnInit {
   private notes: Notes[] = [];
   error = new Subject<string>();
-
-
-  
 
   constructor(private http: HttpClient) {
       
@@ -25,6 +21,10 @@ export class NotesService  {
 
 
   private url = 'https://localhost:44371/api/note/';
+
+  ngOnInit() {
+    
+  }
 
   //getting the notes from API
   getNotes() {
