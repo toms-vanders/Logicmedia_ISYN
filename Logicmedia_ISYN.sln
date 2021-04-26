@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ISYN.DesktopUI", "ISYN.Desk
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ISYN.API", "ISYN.API\ISYN.API.csproj", "{FE317531-C7FE-44C4-B25C-656694934666}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISYN.WebClient", "ISYN.WebClient\ISYN.WebClient.csproj", "{0E3B3E1B-B23C-4047-B156-F753EA7A96D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ISYN.WebClient", "ISYN.WebClient\ISYN.WebClient.csproj", "{0E3B3E1B-B23C-4047-B156-F753EA7A96D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISYN.AngularClient", "ISYN.AngularClient\ISYN.AngularClient.csproj", "{7F7C9A4D-F43C-4ECB-BC80-3332ACF9641C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{0E3B3E1B-B23C-4047-B156-F753EA7A96D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E3B3E1B-B23C-4047-B156-F753EA7A96D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E3B3E1B-B23C-4047-B156-F753EA7A96D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F7C9A4D-F43C-4ECB-BC80-3332ACF9641C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F7C9A4D-F43C-4ECB-BC80-3332ACF9641C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F7C9A4D-F43C-4ECB-BC80-3332ACF9641C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F7C9A4D-F43C-4ECB-BC80-3332ACF9641C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

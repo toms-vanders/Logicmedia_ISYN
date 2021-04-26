@@ -1,0 +1,58 @@
+<div class="container">
+
+  <button type="button" class="btn btn-primary text-center" (click)="show()">
+    Add note
+  </button>
+  <style>
+    .c {
+      margin-top: 169px;
+    }
+  </style>
+  <!-- The Modal -->
+  <div class="modal c" id="myModal" [style.display]="showModal ? 'block' : 'none'">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">{{ title }}</h4>
+          <button type="button" class="close" data-dismiss="modal" (click)="hide()">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <form #notePost="ngForm" (ngSubmit)="addNote(notePost.value)">
+          <div class="from-group">
+
+            <input style="    background-color: #ece8e8" class="form-control"
+                   type="text"
+                   name="content"
+                   ngModel
+                   required
+                   placeholder="Add the note" />
+          </div>
+          <div class="text-center">
+            <button class="btn btn-primary"
+                    type="submit"
+                    [disabled]="!notePost.valid">
+              Add
+            </button>
+          </div>
+
+          <div class="row" *ngIf="showMsg">
+            <div class="col-xs-12">
+              <p class="alert alert-success">
+                <strong>Success!</strong>The note was successfully added.
+              </p>
+            </div>
+          </div>
+        </form>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="hide()">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

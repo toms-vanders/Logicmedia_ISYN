@@ -26,6 +26,8 @@ export class NotesService implements OnInit {
     
   }
 
+  
+
   //getting the notes from API
   getNotes() {
     return this.http
