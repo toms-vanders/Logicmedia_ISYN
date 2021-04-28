@@ -25,7 +25,7 @@ namespace ISYN.API.Controllers
         public IEnumerable<string> GetAllNotes(string content)
         {
             NoteDataAccess data = new NoteDataAccess();
-
+            
             return data.GetNotes(content);
         }
 

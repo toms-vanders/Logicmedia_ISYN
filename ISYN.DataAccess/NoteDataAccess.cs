@@ -49,19 +49,12 @@ namespace ISYN.DataAccess
                         .Field(f => f.Content)
                         .Boost(2)
                         .Query(content)
+                    ) || q
+                    .RankFeature(rf => rf
+                        .Field(f => f.Rank)
                     )
                  )
             );
-            //var searchResponse = client.Search<Note>(s => s
-            //    .Size(15)
-            //    .Query(q => q
-            //        .Match(m => m
-            //            .Field(f => f.Content)
-            //            .Fuzziness(Fuzziness.Auto)
-            //            .Query(content)
-            //        )
-            //    )
-            //);
 
             var resultsList = new List<string>();
 
@@ -87,6 +80,7 @@ namespace ISYN.DataAccess
             return false;
         }
 
+        // Won't be really used in our solution, but we can write about it in the report possibily on why we didn't choose this option
         public IEnumerable<string> SearchAsYouType(string content)
         {
             ElasticClient client = ElasticClientConnection.GetElasticClient();
@@ -112,6 +106,34 @@ namespace ISYN.DataAccess
 
             return resultsList;
 
+        }
+        
+        //TODO - Upsert is not working, need a solution where existing notes are updated and new notes are created. Might need to make seperate calls
+        public bool BulkUpdateNotes()
+        {
+            ElasticClient client = ElasticClientConnection.GetElasticClient();
+            List<Note> notesList = new List<Note>();
+            notesList.Add(new Note { Id = "2", Content = "Test 13" });
+            notesList.Add(new Note { Id = "Xc_M_ngB7htcXtcZJ9SA", Content = "Test 111" });
+            notesList.Add(new Note { Id = "", Content = "Test 15", Rank = 1 });
+          
+            var bulkResponse = client.Bulk(b => b
+                .UpdateMany(notesList, (bu, d) => bu
+                    .Script(s => s
+                        .Source("ctx._source.rank += params.rank")
+                        .Params(p => p
+                            .Add("rank", 1)
+                            )
+                        )
+                    .Upsert(d)
+                )
+            );
+
+            if (bulkResponse.IsValid)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
