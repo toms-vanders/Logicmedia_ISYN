@@ -22,23 +22,35 @@ namespace ISYN.API.Controllers
         }
 
         [HttpGet("{content}")]
-        public IEnumerable<string> GetAllNotes(string content)
+        public IEnumerable<Note> GetAllNotes(string content)
         {
             NoteDataAccess data = new NoteDataAccess();
-            
+
             return data.GetNotes(content);
         }
 
         [HttpPost]
-        public ActionResult<Note> InsertNote([FromBody] Note note)
+        public bool InsertNote(string content)
         {
             NoteDataAccess data = new NoteDataAccess();
 
-            if (data.InsertNote(note.Content))
+            if (data.InsertNote(content))
             {
-                return note;
+                return true;
             }
-            return BadRequest("Invalid data.");
+            return false;
+        }
+
+        [HttpPut]
+        public bool UpdateNote(string noteId)
+        {
+            NoteDataAccess data = new NoteDataAccess();
+
+            if (data.UpdateNote(noteId))
+            {
+                return true;
+            }
+            return false;
         }
 
         [HttpGet("sayt/{content}")]

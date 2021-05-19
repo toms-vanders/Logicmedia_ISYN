@@ -35,9 +35,16 @@ namespace ISYN.DesktopUI
 
             string content = searchBar.Text;
             string responseBody = await _httpClient.GetStringAsync("api/note/" + content);
-            var notes = JsonConvert.DeserializeObject<IEnumerable<string>>(responseBody);
+            var notes = JsonConvert.DeserializeObject<IEnumerable<Note>>(responseBody);
 
-            searchResults.ItemsSource = notes;
+            var resultList = new List<string>();
+
+            foreach (var note in notes)
+            {
+                resultList.Add(note.Content + " (Score: " + note.Score + ")");
+            }
+
+            searchResults.ItemsSource = resultList;
         }
 
         public async void GetAllNotes()

@@ -27,7 +27,7 @@ namespace ISYN.DataAccess
 
         }
 
-        public IEnumerable<string> GetNotes(string content)
+        public IEnumerable<Note> GetNotes(string content)
         {
             ElasticClient client = ElasticClientConnection.GetElasticClient();
 
@@ -56,14 +56,21 @@ namespace ISYN.DataAccess
                  )
             );
 
-            var resultsList = new List<string>();
-
+            List<Note> resultList = new List<Note>();
+            
             foreach (var note in searchResponse.Hits)
             {
-                resultsList.Add(note.Source.Content + " (Score: " + note.Score + ")");
+                resultList.Add(new Note { Id = note.Id, Content = note.Source.Content, Score = (double)note.Score });
             }
 
-            return resultsList;
+            //var resultList = new List<string>();
+
+            //foreach (var note in searchResponse.Hits)
+            //{
+            //    resultList.Add(note.Source.Content + " (Score: " + note.Score + ")");
+            //}
+
+            return resultList;
         }
 
         public bool InsertNote(string content)
@@ -74,6 +81,26 @@ namespace ISYN.DataAccess
 
             var indexResponse = client.IndexDocument(note);
             if (indexResponse.IsValid)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool UpdateNote(string noteId)
+        {
+            ElasticClient client = ElasticClientConnection.GetElasticClient();
+
+            var updateResponse = client.Update<Note>(noteId, u => u
+                .Script(script => script
+                    .Source("ctx._source.rank += params.rank")
+                    .Params(p => p
+                        .Add("rank", 1)
+                    )
+                )
+            );
+
+            if (updateResponse.IsValid)
             {
                 return true;
             }

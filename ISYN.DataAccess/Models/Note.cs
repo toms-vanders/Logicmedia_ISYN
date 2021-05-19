@@ -9,6 +9,7 @@ namespace ISYN.DataAccess.Models
         public string Id { get; set; }
         public string Content { get; set; }
         public int Rank { get; set; }
+        public double Score { get; set; }
 
 
         public Note()
