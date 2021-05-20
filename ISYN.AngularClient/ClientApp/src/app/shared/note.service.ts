@@ -104,7 +104,17 @@ export class NoteService implements OnInit  {
     );
   }
 
+  
 
-
+  postNotes(content: string) {
+    const noteData: Note = {content:content}
+    return this.http
+      .post(this.url, noteData)
+      .pipe(
+        map(noteData => {
+          console.log(JSON.stringify(noteData))
+        }),
+      );
+  }
 
 }

@@ -29,14 +29,15 @@ namespace ISYN.API.Controllers
             return data.GetNotes(content);
         }
 
-        [HttpPost]
-        public bool InsertNote(string content)
+        [HttpPost("insert")]
+        public bool InsertNote([FromBody ] Note note)
         {
             NoteDataAccess data = new NoteDataAccess();
 
-            if (data.InsertNote(content))
+            if (data.InsertNote(note.Content))
             {
                 return true;
+                
             }
             return false;
         }

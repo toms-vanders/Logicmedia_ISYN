@@ -23,7 +23,7 @@ export class AddNoteComponent {
   note: Note;
   isFetching = false;
   /** AddNote ctor */
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private noteService: NoteService) {
 
   }
 
@@ -43,14 +43,28 @@ export class AddNoteComponent {
   }
 
 
-  addNote(data) {
+  addNote(noteData: Note) {
 
-    this.http.post(this.url, data).subscribe((result) => {
-      console.warn("result", result)
+    this.noteService.postNotes(noteData.content).subscribe(note => {
+      this.content = noteData.content;
+    },
+      error => {
+        this.error = error.message;
+        console.log(error);
+      }
+    );
+  }
+
+
+  /*addNote(content) {
+
+    this.http.post(this.url, content).subscribe((content) => {
+      console.warn("result", content)
     })
-    console.warn(JSON.stringify(data));
+    console.warn(JSON.stringify(content));
     this.showMsg = true;
   }
+*/
 
 
 }

@@ -19,9 +19,9 @@
            placeholder="Text after @ symbol is being searched for" />
 
     <ul class="list-group" *ngIf="results">
-      <li class="list-group-item" *ngFor="let result of results | slice: 0:9" (click)="noteSelected(result)">
+      <li class="list-group-item" *ngFor="let result of results | slice: 0:9" (click)="noteSelected(result.content)">
         <a target="_blank">
-          {{ result }}
+          {{ result.content }}
         </a>
       </li>
     </ul>

@@ -80,11 +80,14 @@ namespace ISYN.DataAccess
             var note = new Note(content);
 
             var indexResponse = client.IndexDocument(note);
+
+                      
             if (indexResponse.IsValid)
             {
                 return true;
             }
             return false;
+           
         }
 
         public bool UpdateNote(string noteId)
