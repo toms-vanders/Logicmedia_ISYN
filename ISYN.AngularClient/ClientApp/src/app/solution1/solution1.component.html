@@ -1,7 +1,7 @@
 <h2>1st SOLUTION</h2>
 
 
-<input class="form-control form-control-lg" 
+<input class="form-control form-control-lg"
        style="width:100%"
        name="searchedTerm"
        type="form-control"
@@ -21,6 +21,7 @@
 
 
 
+
 <div class="row">
   <div class="col-md-12">
 
@@ -32,13 +33,13 @@
         </tr>
       </thead>
       <tbody>
-        <p *ngIf="searchedTerm.length <= 0 && !isFetching">Input the term in the search field...</p>
-        <ng-container *ngIf="loadedNotes.length >=1  && !isFetching">
-          <tr *ngFor="let note of loadedNotes | paginate: {itemsPerPage:5, currentPage:p};">
-            <td><pre>{{note.content}}</pre></td>
-            <td><pre>{{note.score}}</pre></td>
-          </tr>
-        </ng-container>
+        <p *ngIf="loadedNotes.length < 1 && !isFetching">Loading...</p>
+        <ng-container *ngIf="loadedNotes.length >= 1 && !isFetching">
+            <tr *ngFor="let note of loadedNotes | paginate: {itemsPerPage:5, currentPage:p};">
+              <td><pre>{{note.content}}</pre></td>
+              <td><pre>{{note.score}}</pre></td>
+            </tr>
+          </ng-container>
       </tbody>
       <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </table>

@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { NoteService } from '../shared/note.service';
+import { Note } from '../shared/note.model';
 import { Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+
 
 
 
@@ -14,6 +17,11 @@ export class Solution2Component {
   results: object;
   searchTerm$ = new Subject<string>();
   theTextArea = '';
+  loadedNotes: Note[] = [];
+  error = null;
+  content: any;
+  note: Note;
+  isFetching = false;
 
   constructor(private noteService: NoteService) {
     noteService.searchNotes(this.searchTerm$).subscribe(
@@ -21,6 +29,7 @@ export class Solution2Component {
       error => { console.log(error.message); }
     );
   }
+
 
 
   private noteSelected(result: string) {
@@ -33,4 +42,18 @@ export class Solution2Component {
 
   }
 
-}  
+  addNote(noteData: Note) {
+
+    this.noteService.postNotes(noteData.content).subscribe(note => {
+      this.content = noteData.content;
+    },
+      error => {
+        this.error = error.message;
+        console.log(error);
+      }
+    );
+  }
+
+}
+
+//this.noteService.postNotes(noteData.content.replace(/\s/g, "")).subscribe(note => {
