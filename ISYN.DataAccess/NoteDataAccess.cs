@@ -114,7 +114,7 @@ namespace ISYN.DataAccess
             var searchResponse = client.Search<Note>(s => s
                 .Query(q => q
                     .Term(t => t
-                        .Field(f => f.Content.Suffix("keyword"))
+                        .Field(f => f.Content.Suffix("raw"))
                         .Value(content)
                     )
                 )
