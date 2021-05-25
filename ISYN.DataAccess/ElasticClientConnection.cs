@@ -12,7 +12,7 @@ namespace ISYN.DataAccess
             var server = new Uri("http://search.aensland.tech");
 
             var settings = new ConnectionSettings(server)
-                .DefaultIndex("notes")
+                .DefaultIndex("note_conf")
                 .RequestTimeout(TimeSpan.FromMinutes(2))
                 .BasicAuthentication("toms", "helloworld");
 

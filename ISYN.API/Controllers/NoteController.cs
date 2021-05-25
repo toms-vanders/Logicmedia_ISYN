@@ -29,30 +29,32 @@ namespace ISYN.API.Controllers
             return data.GetNotes(content);
         }
 
-        [HttpPost("insert")]
-        public bool InsertNote([FromBody] Note note)
-        {
-            NoteDataAccess data = new NoteDataAccess();
+        //Probably will be depricated
 
-            if (data.InsertNote(note.Content))
-            {
-                return true;
+        //[HttpPost("insert")]
+        //public bool InsertNote([FromBody] Note note)
+        //{
+        //    NoteDataAccess data = new NoteDataAccess();
+
+        //    if (data.InsertNote(note.Content))
+        //    {
+        //        return true;
                 
-            }
-            return false;
-        }
+        //    }
+        //    return false;
+        //}
 
-        [HttpPut("update")]
-        public bool UpdateNote([FromBody] Note note)
-        {
-            NoteDataAccess data = new NoteDataAccess();
+        //[HttpPut("update")]
+        //public bool UpdateNote([FromBody] Note note)
+        //{
+        //    NoteDataAccess data = new NoteDataAccess();
 
-            if (data.UpdateNote(note.Id))
-            {
-                return true;
-            }
-            return false;
-        }
+        //    if (data.UpdateNote(note.Id))
+        //    {
+        //        return true;
+        //    }
+        //    return false;
+        //}
 
         [HttpPost("post")]
         public bool PostNote([FromBody] Note note)

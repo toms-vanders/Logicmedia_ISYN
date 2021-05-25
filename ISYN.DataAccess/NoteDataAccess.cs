@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using ISYN.DataAccess.Models;
 using Nest;
@@ -121,7 +122,20 @@ namespace ISYN.DataAccess
 
             if (searchResponse.IsValid)
             {
-                return true;
+                if (searchResponse.Hits.Count > 0)
+                {
+                    if (UpdateNote(searchResponse.Hits.FirstOrDefault().Id))
+                    {
+                        return true;
+                    }
+                }
+                else
+                {
+                    if (InsertNote(content))
+                    {
+                        return true;
+                    }
+                }
             }
             return false;
         }
