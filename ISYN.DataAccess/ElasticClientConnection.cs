@@ -9,13 +9,12 @@ namespace ISYN.DataAccess
     {
         public static ElasticClient GetElasticClient()
         {
-            //var local = new Uri("http://localhost:9200");
             var server = new Uri("http://search.aensland.tech");
 
             var settings = new ConnectionSettings(server)
                 .DefaultIndex("notes")
                 .RequestTimeout(TimeSpan.FromMinutes(2))
-                .BasicAuthentication("toms", "helloworld"); ;
+                .BasicAuthentication("toms", "helloworld");
 
             return new ElasticClient(settings);
         }

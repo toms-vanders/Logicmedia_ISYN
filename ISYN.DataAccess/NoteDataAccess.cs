@@ -60,15 +60,8 @@ namespace ISYN.DataAccess
             
             foreach (var note in searchResponse.Hits)
             {
-                resultList.Add(new Note { Id = note.Id, Content = note.Source.Content, Score = (double)note.Score });
+                resultList.Add(new Note { Id = note.Id, Content = note.Source.Content, Score = note.Score.ToString() });
             }
-
-            //var resultList = new List<string>();
-
-            //foreach (var note in searchResponse.Hits)
-            //{
-            //    resultList.Add(note.Source.Content + " (Score: " + note.Score + ")");
-            //}
 
             return resultList;
         }
@@ -77,7 +70,9 @@ namespace ISYN.DataAccess
         {
             ElasticClient client = ElasticClientConnection.GetElasticClient();
 
-            var note = new Note(content);
+            var note = new Note();
+            note.Content = content;
+            note.Rank = 1;
 
             var indexResponse = client.IndexDocument(note);
 
@@ -101,9 +96,30 @@ namespace ISYN.DataAccess
                         .Add("rank", 1)
                     )
                 )
+                .RetryOnConflict(5)
             );
 
             if (updateResponse.IsValid)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool PostNote(string content)
+        {
+            ElasticClient client = ElasticClientConnection.GetElasticClient();
+
+            var searchResponse = client.Search<Note>(s => s
+                .Query(q => q
+                    .Term(t => t
+                        .Field(f => f.Content.Suffix("keyword"))
+                        .Value(content)
+                    )
+                )
+            );
+
+            if (searchResponse.IsValid)
             {
                 return true;
             }
@@ -116,7 +132,6 @@ namespace ISYN.DataAccess
             ElasticClient client = ElasticClientConnection.GetElasticClient();
 
             var searchResponse = client.Search<Note>(s => s
-                .Index("notes_sayt")
                 .Query(q => q
                     .MultiMatch(mm => mm
                         .Query(content)
@@ -135,35 +150,6 @@ namespace ISYN.DataAccess
             }
 
             return resultsList;
-
-        }
-        
-        //TODO - Upsert is not working, need a solution where existing notes are updated and new notes are created. Might need to make seperate calls
-        public bool BulkUpdateNotes()
-        {
-            ElasticClient client = ElasticClientConnection.GetElasticClient();
-            List<Note> notesList = new List<Note>();
-            notesList.Add(new Note { Id = "2", Content = "Test 13" });
-            notesList.Add(new Note { Id = "Xc_M_ngB7htcXtcZJ9SA", Content = "Test 111" });
-            notesList.Add(new Note { Id = "", Content = "Test 15", Rank = 1 });
-          
-            var bulkResponse = client.Bulk(b => b
-                .UpdateMany(notesList, (bu, d) => bu
-                    .Script(s => s
-                        .Source("ctx._source.rank += params.rank")
-                        .Params(p => p
-                            .Add("rank", 1)
-                            )
-                        )
-                    .Upsert(d)
-                )
-            );
-
-            if (bulkResponse.IsValid)
-            {
-                return true;
-            }
-            return false;
         }
     }
 }

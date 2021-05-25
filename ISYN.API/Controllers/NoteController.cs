@@ -30,7 +30,7 @@ namespace ISYN.API.Controllers
         }
 
         [HttpPost("insert")]
-        public bool InsertNote([FromBody ] Note note)
+        public bool InsertNote([FromBody] Note note)
         {
             NoteDataAccess data = new NoteDataAccess();
 
@@ -42,12 +42,24 @@ namespace ISYN.API.Controllers
             return false;
         }
 
-        [HttpPut]
-        public bool UpdateNote(string noteId)
+        [HttpPut("update")]
+        public bool UpdateNote([FromBody] Note note)
         {
             NoteDataAccess data = new NoteDataAccess();
 
-            if (data.UpdateNote(noteId))
+            if (data.UpdateNote(note.Id))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        [HttpPost("post")]
+        public bool PostNote([FromBody] Note note)
+        {
+            NoteDataAccess data = new NoteDataAccess();
+
+            if (data.PostNote(note.Content))
             {
                 return true;
             }
