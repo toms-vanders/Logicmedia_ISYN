@@ -31,7 +31,14 @@ export class Solution2Component {
     );
   }
 
- 
+  showModal: boolean = false;
+  show() {
+    this.showModal = true; 
+
+  }
+  hide() {
+    this.showModal = false;
+  }
 
 
   private noteSelected(result: string) {
@@ -58,9 +65,7 @@ export class Solution2Component {
     this.showMsg = true;
   }
 
-  reloadPage() {
-    window.location.reload();
-  }
+ 
 
   
 

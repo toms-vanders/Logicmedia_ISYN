@@ -28,23 +28,14 @@
       <div class="text-center">
         <button class="btn btn-success"
                 type="submit"
-                >
+                (click)="show(); notePost.resetForm()">
           Add the note
         </button>
       </div>
     </form>
 
     <hr />
-    <div class="col-xs-12" *ngIf="showMsg">
-      <p class="alert alert-success">
-        <strong>Success!</strong>The note was successfully added.
-        <button class="btn btn-primary"
-                type="button"
-                (click)="reloadPage()">
-          Create a new note
-        </button>
-      </p>
-    </div>
+    
 
 
 
@@ -62,7 +53,27 @@
     </svg>
   </div>
 
+  <div class="modal c" id="myModal" [style.display]="showModal ? 'block' : 'none'">
+    <div class="modal-dialog">
+      <div class="modal-content">
 
-
-
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" (click)="hide()">&times;</button>
+        </div>
+        <div class="col-xs-12" *ngIf="showMsg">
+          <p class="alert alert-success">
+            <strong>Success!</strong>The note was successfully added.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="hide()">Close</button>
+        </div>
       </div>
+    </div>
+   </div>
+
+
+
+
+ </div>
