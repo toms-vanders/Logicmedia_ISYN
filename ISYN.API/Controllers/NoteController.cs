@@ -29,33 +29,6 @@ namespace ISYN.API.Controllers
             return data.GetNotes(content);
         }
 
-        //Probably will be depricated
-
-        //[HttpPost("insert")]
-        //public bool InsertNote([FromBody] Note note)
-        //{
-        //    NoteDataAccess data = new NoteDataAccess();
-
-        //    if (data.InsertNote(note.Content))
-        //    {
-        //        return true;
-                
-        //    }
-        //    return false;
-        //}
-
-        //[HttpPut("update")]
-        //public bool UpdateNote([FromBody] Note note)
-        //{
-        //    NoteDataAccess data = new NoteDataAccess();
-
-        //    if (data.UpdateNote(note.Id))
-        //    {
-        //        return true;
-        //    }
-        //    return false;
-        //}
-
         [HttpPost("post")]
         public bool PostNote([FromBody] Note note)
         {
@@ -66,14 +39,6 @@ namespace ISYN.API.Controllers
                 return true;
             }
             return false;
-        }
-
-        [HttpGet("sayt/{content}")]
-        public IEnumerable<string> SearchAsYouType(string content)
-        {
-            NoteDataAccess data = new NoteDataAccess();
-
-            return data.SearchAsYouType(content);
         }
     }
 }

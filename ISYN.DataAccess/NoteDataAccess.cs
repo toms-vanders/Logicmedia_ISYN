@@ -9,6 +9,10 @@ namespace ISYN.DataAccess
 {
     public class NoteDataAccess
     {
+        /// <summary>
+        /// Simply searches for first 10 notes in the index. For demo purposes only
+        /// </summary>
+        /// <returns>Returns first 10 notes in the index</returns>
         public IEnumerable<string> GetAllNotes()
         {
             ElasticClient client = ElasticClientConnection.GetElasticClient();
@@ -28,6 +32,11 @@ namespace ISYN.DataAccess
 
         }
 
+        /// <summary>
+        /// Main search method for matching text with documents in the ES index. 
+        /// </summary>
+        /// <param name="content">text that needs to be searched</param>
+        /// <returns>Returns list of 10 most relevant notes</returns>
         public IEnumerable<Note> GetNotes(string content)
         {
             ElasticClient client = ElasticClientConnection.GetElasticClient();
@@ -67,6 +76,11 @@ namespace ISYN.DataAccess
             return resultList;
         }
 
+        /// <summary>
+        /// Inserts a new document in ES index
+        /// </summary>
+        /// <param name="content">content of the note to be added</param>
+        /// <returns>returns true if note was succesfuly added to the index</returns>
         public bool InsertNote(string content)
         {
             ElasticClient client = ElasticClientConnection.GetElasticClient();
@@ -86,6 +100,11 @@ namespace ISYN.DataAccess
            
         }
 
+        /// <summary>
+        /// Updates document's popularity by increasing specific documents rank by 1
+        /// </summary>
+        /// <param name="noteId">ID of the ES document</param>
+        /// <returns>Returns true if update successful</returns>
         public bool UpdateNote(string noteId)
         {
             ElasticClient client = ElasticClientConnection.GetElasticClient();
@@ -107,15 +126,25 @@ namespace ISYN.DataAccess
             return false;
         }
 
+        /// <summary>
+        /// This method checks if the note exists in the ES index. If so, it updates the documents popularity, if not, it 
+        /// creates a new document in index.
+        /// </summary>
+        /// <param name="content">Content of the document that needs to be posted</param>
+        /// <returns></returns>
         public bool PostNote(string content)
         {
             ElasticClient client = ElasticClientConnection.GetElasticClient();
+
+            char[] charsToTrim = { ',', '.', ' ', '@', ';', '!', '?', '"', ':' };
+
+            string trimmedContent = content.Trim(charsToTrim);
 
             var searchResponse = client.Search<Note>(s => s
                 .Query(q => q
                     .Term(t => t
                         .Field(f => f.Content.Suffix("raw"))
-                        .Value(content)
+                        .Value(trimmedContent)
                     )
                 )
             );
@@ -131,39 +160,13 @@ namespace ISYN.DataAccess
                 }
                 else
                 {
-                    if (InsertNote(content))
+                    if (InsertNote(trimmedContent))
                     {
                         return true;
                     }
                 }
             }
             return false;
-        }
-
-        // Won't be really used in our solution, but we can write about it in the report possibily on why we didn't choose this option
-        public IEnumerable<string> SearchAsYouType(string content)
-        {
-            ElasticClient client = ElasticClientConnection.GetElasticClient();
-
-            var searchResponse = client.Search<Note>(s => s
-                .Query(q => q
-                    .MultiMatch(mm => mm
-                        .Query(content)
-                        .Type(TextQueryType.BoolPrefix)
-                        .Fields(f => f.Field("content").Field("content._2gram").Field("content._3gram"))
-                        .Fuzziness(Fuzziness.Auto)
-                    )
-                )
-            );
-
-            var resultsList = new List<string>();
-
-            foreach (var note in searchResponse.Hits)
-            {
-                resultsList.Add(note.Source.Content + " (Score: " + note.Score + ")");
-            }
-
-            return resultsList;
         }
     }
 }
