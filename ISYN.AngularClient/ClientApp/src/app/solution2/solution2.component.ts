@@ -6,7 +6,6 @@ import { HttpClient } from '@angular/common/http';
 
 
 
-
 @Component({
   selector: 'app-solution2',
   templateUrl: './solution2.component.html',
@@ -22,6 +21,8 @@ export class Solution2Component {
   content: any;
   note: Note;
   isFetching = false;
+  showMsg = false;
+
 
   constructor(private noteService: NoteService) {
     noteService.searchNotes(this.searchTerm$).subscribe(
@@ -30,6 +31,7 @@ export class Solution2Component {
     );
   }
 
+ 
 
 
   private noteSelected(result: string) {
@@ -50,9 +52,17 @@ export class Solution2Component {
       error => {
         this.error = error.message;
         console.log(error);
+        
       }
     );
+    this.showMsg = true;
   }
+
+  reloadPage() {
+    window.location.reload();
+  }
+
+  
 
 }
 
