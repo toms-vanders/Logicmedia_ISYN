@@ -7,7 +7,7 @@ Elasticsearch CRUD queries were implemented using .NET client. Main search query
 <!-- CONTRIBUTORS -->
 ## Acknowledgments
 
-Project was done in collaboration with company Logicmedia A/S in Aalborg as part of 4th Semeter Computer Science programme at UCN.
+Project was done in collaboration with company Logicmedia A/S in Aalborg as part of 4th Semester Computer Science programme at UCN.
 
 Contributor names and github profiles:
 
